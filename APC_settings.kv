@@ -1,0 +1,416 @@
+
+
+<BtnControl, BtnMainControl>
+    text: ""
+    text_size: self.size
+    font_size: 20
+    valign: "center"
+    halign: "center"
+    background_normal: ''
+    #background_color: [1, 1, 1, 1]
+    background_color: 0,0,0,0
+
+<Settings_Popup@Popup>
+    auto_dismiss: False
+    size_hint: 0.6, 0.2
+    pos_hint: {"x":0.2, "center":1}
+    title: "Время будет сброшено!"
+
+    BoxLayout:
+        orientation: 'horizontal'
+        size: root.width, root.height
+        Button:
+            text: "Ok"
+            font_size: 16
+            #on_press: root.clear()
+            #on_release: root.dismiss()
+            #on_press: root.dialog_dismiss()
+        Button:
+            text: "Вернуться"
+            font_size: 16
+            on_press: root.manager.current = 'menu'
+
+<Round_Widget>
+    id: Round_Widget_id
+    orientation: "vertical"
+    size_hint: [1, 0.4]
+
+    BoxLayout:
+        orientation: "horizontal"
+        size_hint: [1, 0.3]
+        background_color: 0.5, 0, 0.5, 1
+        background_normal: ""
+        canvas.before:
+            Color:
+                rgba: 0.5, 0.5, 0.5, 0.5
+            Line:    # --- adds a border --- #
+                width: 2
+                rectangle: self.x, self.y, self.width, self.height
+
+        Label:
+            text: "round 1"
+            size_hint: [1, 0.25]
+            pos_hint: {'center_x':0.5, 'center_y':0.5}
+
+
+        BoxLayout:
+            orientation: "horizontal"
+            size_hint: [1, 0.5]
+            pos_hint: {'center_x':0.5, 'center_y':0.5}
+
+            Button:
+                text: "-"
+            Label:
+                text: "5"
+            Label:
+                text: "10"
+            Button:
+                text: "+"
+
+
+        Label:
+            text: "blinds"
+            size_hint: [1, 0.25]
+            pos_hint: {'center_x':0.5, 'center_y':0.5}
+            valign: "top"
+            halign: "center"
+
+##########################################################################
+# Структура App
+
+<Manager>:
+    MenuScreen:
+        id: MenuScreen
+        name: 'menu'
+        #number: SettingsScreen.round_minutes # binding
+    SettingsScreen:
+        id: SettingsScreen
+        name: 'settings'
+
+
+<MenuScreen>
+    BoxLayout:
+        orientation: "vertical"
+        size: root.width, root.height
+        background_color: (1, 1, 1, 1)
+        canvas.before:
+            Color:
+                rgba: self.background_color
+            Rectangle:
+                size: self.size
+                pos: self.pos
+        #padding:10
+        #spacing:10
+
+        BoxLayout:
+            orientation: "horizontal"
+            size_hint: [1, 0.15]
+
+            Label:
+                size_hint: [0.2, 1]
+                text: ""
+                text_size: self.size
+
+            BoxLayout:
+                orientation: "vertical"
+                size_hint: [0.7, 1]
+                #size: root.width, root.height
+
+                #Image:
+                    #size_hint: [1, 1]
+                    #source: "./icon/Arizona.png"
+                    #allow_stretch: True
+                    #keep_ratio: True
+                    #center_x: self.parent.center_x
+                    #center_y: self.parent.center_y
+
+                Label:
+                    size_hint: [1, 0.7]
+                    text: "ARIZONA"
+                    font_name: 'Georgia'
+                    text_size: self.size
+                    font_size: 40
+                    valign: "bottom"
+                    halign: "center"
+                    #padding_x: 5
+
+
+
+                Label:
+                    size_hint: [1, 0.3]
+                    text: "POKER CLUB"
+                    font_name: 'Georgia'
+                    text_size: self.size
+                    font_size: 20
+                    valign: "top"
+                    halign: "center"
+                    #padding_x: 5
+
+            Button:
+                size_hint: [0.2, 1]
+                #text: "btn_1"
+                #text_size: self.size
+                #font_size: 20
+                valign: "center"
+                halign: "center"
+                background_normal: ''
+                background_color: [1, 1, 1, 1]
+                on_press: root.manager.current = 'settings'
+                on_press: root.button_settings()
+                Image:
+                    source: "./icon/settings.png"
+                    size: 30, 30
+                    center_x: self.parent.center_x
+                    center_y: self.parent.center_y
+
+
+
+        BoxLayout:
+            orientation: "vertical"
+            size_hint: [1, 0.7]
+
+            Label:
+                size_hint: [1, 0.4]
+                text: "b-1"
+                text_size: self.size
+                valign: "center"
+                halign: "center"
+
+            Label:
+                id: lbl_round_minutes_main
+                size_hint: [1, 0.2]
+                text: "00:00"
+                text_size: self.size
+                font_size: 40
+                valign: "center"
+                halign: "center"
+
+                #text: str(round(root.round_minutes))
+
+
+
+            Label:
+                size_hint: [1, 0.4]
+                text: "b-2"
+                text_size: self.size
+                valign: "center"
+                halign: "center"
+
+        BoxLayout:
+            orientation: "horizontal"
+            size_hint: [1, 0.15]
+
+            BtnControl:
+                size_hint: [0.2, 1]
+                Image:
+                    source: "./icon/prev.png"
+                    #x: self.parent.x
+                    #y: self.parent.y
+                    size: 50, 50
+                    center_x: self.parent.center_x
+                    center_y: self.parent.center_y
+
+            BtnControl:
+                id: button_start
+                size_hint: [0.2, 1]
+                on_press: root.thread_start()
+                on_press: root.button_start_disable()
+                #on_press: root.button_start_press()
+                Image:
+                    id: button_start_normal
+                    source: "./icon/play.png"
+                    size: 75, 75
+                    center_x: self.parent.center_x
+                    center_y: self.parent.center_y
+
+            BtnControl:
+                id: button_pause
+                size_hint: [0.2, 1]
+                on_press: root.thread_pause()
+                on_press: root.button_pause_disable()
+                #on_press: root.button_pause_press()
+
+                Image:
+                    id: button_pause_normal
+                    source: "./icon/pause.png"
+                    size: 75, 75
+                    center_x: self.parent.center_x
+                    center_y: self.parent.center_y
+
+
+            BtnControl:
+                size_hint: [0.2, 1]
+                Image:
+                    source: "./icon/next.png"
+                    #x: self.parent.x
+                    #y: self.parent.y
+                    size: 50, 50
+                    center_x: self.parent.center_x
+                    center_y: self.parent.center_y
+
+##########################################################################
+<SettingsScreen>
+    BoxLayout:
+        orientation: "vertical"
+        size: root.width, root.height
+        background_color: (1, 1, 1, 1)
+        canvas.before:
+            Color:
+                rgba: self.background_color
+            Rectangle:
+                size: self.size
+                pos: self.pos
+
+        BoxLayout:
+            orientation: "horizontal"
+            size_hint: [1, 0.15]
+
+            Label:
+                size_hint: [0.2, 1]
+                text: ""
+                text_size: self.size
+
+            BoxLayout:
+                orientation: "vertical"
+                size_hint: [0.6, 1]
+
+                Label:
+                    size_hint: [1, 0.7]
+                    text: "ARIZONA"
+                    font_name: 'Georgia'
+                    text_size: self.size
+                    font_size: 40
+                    valign: "bottom"
+                    halign: "center"
+                    #padding_x: 5
+
+                Label:
+                    size_hint: [1, 0.3]
+                    text: "POKER CLUB"
+                    font_name: 'Georgia'
+                    text_size: self.size
+                    font_size: 20
+                    valign: "top"
+                    halign: "center"
+                    #padding_x: 5
+
+            Button:
+                size_hint: [0.2, 1]
+                #text: "btn_1"
+                #text_size: self.size
+                #font_size: 20
+                valign: "center"
+                halign: "center"
+                background_normal: ''
+                background_color: [1, 1, 1, 1]
+                on_press: root.manager.current = 'menu'
+                    #root.manager.transition.direction = "right"
+                Image:
+                    source: "./icon/back.png"
+                    size: 30, 30
+                    center_x: self.parent.center_x
+                    center_y: self.parent.center_y
+
+        BoxLayout:
+            orientation: "vertical"
+            size_hint: [1, 0.3]
+
+            Label:
+                size_hint: [1, 0.4]
+                text: "round minutes"
+                font_name: 'Georgia'
+                text_size: self.size
+                font_size: 20
+                valign: "bottom"
+                halign: "center"
+
+            BoxLayout:
+                orientation: "horizontal"
+                size_hint: [1, 0.6]
+
+                BtnControl:
+                    id: btn_round_minutes_minus
+                    on_press: root.round_minutes_minus()
+                    text: "-"
+                    text_size: self.size
+                    font_size: 50
+
+                Label:
+                    id: lbl_round_minutes
+                    text: '0'
+                    font_size: 50
+
+                BtnControl:
+                    id: btn_round_minutes_plus
+                    on_press: root.round_minutes_plus()
+                    text: "+"
+                    text_size: self.size
+                    font_size: 50
+
+        BoxLayout:
+            orientation: "vertical"
+            size_hint: [1, 0.4]
+
+            Label:
+                size_hint: [1, 0.2]
+                text: "rounds"
+                font_name: 'Georgia'
+                text_size: self.size
+                font_size: 20
+                valign: "bottom"
+                halign: "center"
+
+            GridLayout:
+                size_hint:[1, 0.8]
+                id: Box_rounds
+                cols: 1
+
+
+
+
+
+
+
+
+
+        BoxLayout:
+            orientation: "horizontal"
+            size_hint: [1, 0.15]
+
+            Label:
+                size_hint: [0.2, 1]
+                text: ""
+
+
+            BtnControl:
+                size_hint: [0.2, 1]
+                on_press: root.num_rounds_minus()
+                Image:
+                    source: "./icon/minus.png"
+                    #x: self.parent.x
+                    #y: self.parent.y
+                    size: 75, 75
+                    center_x: self.parent.center_x
+                    center_y: self.parent.center_y
+
+            BtnControl:
+                size_hint: [0.2, 1]
+                on_press: root.num_rounds_plus()
+                Image:
+                    source: "./icon/plus.png"
+                    #x: self.parent.x
+                    #y: self.parent.y
+                    size: 75, 75
+                    center_x: self.parent.center_x
+                    center_y: self.parent.center_y
+
+            Label:
+                size_hint: [0.2, 1]
+                text: ""
+
+
+<Label>
+    font_size: 16
+    color: (0, 0, 0, 1)
+
+#STOP 25/05 12:24
