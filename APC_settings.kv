@@ -10,6 +10,13 @@
     #background_color: [1, 1, 1, 1]
     background_color: 0,0,0,0
 
+<Button>
+    background_color: 0,0,0,0
+
+<Label>
+    font_size: 16
+    color: (0, 0, 0, 1)
+
 <Settings_Popup@Popup>
     auto_dismiss: False
     size_hint: 0.6, 0.2
@@ -31,49 +38,42 @@
             on_press: root.manager.current = 'menu'
 
 <Round_Widget>
-    id: Round_Widget_id
-    orientation: "vertical"
-    size_hint: [1, 0.4]
+    id: test
+    orientation: "horizontal"
+    size_hint: [1, 0.3]
+
+
+    Label:
+        text: "round 1"
+        size_hint: [1, 0.25]
+        pos_hint: {'center_x':0.5, 'center_y':0.5}
+
 
     BoxLayout:
         orientation: "horizontal"
-        size_hint: [1, 0.3]
-        background_color: 0.5, 0, 0.5, 1
-        background_normal: ""
-        canvas.before:
-            Color:
-                rgba: 0.5, 0.5, 0.5, 0.5
-            Line:    # --- adds a border --- #
-                width: 2
-                rectangle: self.x, self.y, self.width, self.height
+        size_hint: [1, 0.5]
+        pos_hint: {'center_x':0.5, 'center_y':0.5}
 
+        Button:
+            text: "-"
         Label:
-            text: "round 1"
-            size_hint: [1, 0.25]
-            pos_hint: {'center_x':0.5, 'center_y':0.5}
-
-
-        BoxLayout:
-            orientation: "horizontal"
-            size_hint: [1, 0.5]
-            pos_hint: {'center_x':0.5, 'center_y':0.5}
-
-            Button:
-                text: "-"
-            Label:
-                text: "5"
-            Label:
-                text: "10"
-            Button:
-                text: "+"
-
-
+            text: "5"
         Label:
-            text: "blinds"
-            size_hint: [1, 0.25]
-            pos_hint: {'center_x':0.5, 'center_y':0.5}
-            valign: "top"
-            halign: "center"
+            text: "10"
+        Button:
+            text: "+"
+
+
+    Label:
+        text: "blinds"
+        size_hint: [1, 0.25]
+        pos_hint: {'center_x':0.5, 'center_y':0.5}
+        valign: "top"
+        halign: "center"
+
+<Test_label>
+    id: test_text
+    text: "Its test text"
 
 ##########################################################################
 # Структура App
@@ -361,9 +361,18 @@
                 halign: "center"
 
             GridLayout:
-                size_hint:[1, 0.8]
+                size_hint:[1, 0.1]
                 id: Box_rounds
                 cols: 1
+
+            BoxLayout:
+                id: Round_Widget_id
+                orientation: "vertical"
+                size_hint: [1, 0.7]
+
+                Label
+                    id: test_text2
+                    text: "Its test text"
 
 
 
@@ -409,8 +418,6 @@
                 text: ""
 
 
-<Label>
-    font_size: 16
-    color: (0, 0, 0, 1)
+
 
 #STOP 25/05 12:24

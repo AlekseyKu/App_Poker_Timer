@@ -13,7 +13,8 @@ from kivy.base import runTouchApp
 import time
 import threading
 from kivy.properties import StringProperty, ListProperty
-from PIL import Image
+
+# from PIL import Image
 
 Window.size = (360, 640)
 Builder.load_file('APC_settings.kv')
@@ -22,8 +23,15 @@ Builder.load_file('APC_settings.kv')
 class BtnControl(Button):
     pass
 
+
 class Round_Widget(BoxLayout):
+
     pass
+
+
+class Test_label(Label):
+    def dict(self):
+        pass
 
 
 round_minutes = 0
@@ -152,12 +160,10 @@ class MenuScreen(Num, Screen):
 ##########################################################################
 
 class SettingsScreen(Screen, Num):
-
     num_rounds = 0
 
     def __init__(self, **kwargs):
         super(SettingsScreen, self).__init__(**kwargs)
-
 
     def num_rounds_plus(self):
         self.num_rounds += 1
@@ -169,22 +175,20 @@ class SettingsScreen(Screen, Num):
         print(self.num_rounds)
         self.del_rounds()
 
-
     def add_rounds(self):
-        #for i in range(self.num_rounds):
-        self.ids.Box_rounds.add_widget(Round_Widget(size_hint_y=0.5, pos_hint={'top': 1}))
+        # for i in range(self.num_rounds):
+        # self.ids.Round_Widget_id.add_widget(Round_Widget(size_hint_y=0.5, pos_hint={'top': 1}))
+        self.ids.Round_Widget_id.add_widget(Test_label(size_hint_y=0.5, pos_hint={'top': 1}))
 
     def del_rounds(self):
-        pass
-
-        #self.ids.Box_rounds.remove_widget(Round_Widget)
+        #pass
 
 
-
+        self.ids.Round_Widget_id.remove_widget(self.ids.Test_label)
+        # self.ids.Box_rounds.remove_widget(self.ids.test)
 
     def dialog_dismiss(self):
         self.dialog_dismiss()
-
 
 
 class Manager(ScreenManager):

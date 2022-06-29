@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/APC_clock.iml" filepath="$PROJECT_DIR$/.idea/APC_clock.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../APC_test/.idea/APC_test.iml" filepath="$PROJECT_DIR$/../APC_test/.idea/APC_test.iml" />
     </modules>
   </component>
 </project>
