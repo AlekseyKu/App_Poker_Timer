@@ -5,16 +5,16 @@ from kivy.uix.widget import Widget
 from kivy.uix.label import Label
 from kivy.properties import NumericProperty
 from kivy.uix.boxlayout import BoxLayout
-#from kivy.clock import Clock
+# from kivy.clock import Clock
 from kivy.uix.button import Button
-#from kivy.uix.dropdown import DropDown
+# from kivy.uix.dropdown import DropDown
 from kivy.uix.screenmanager import ScreenManager, Screen
-#from kivy.base import runTouchApp
+# from kivy.base import runTouchApp
 import time
 import threading
 from kivy.properties import StringProperty, ListProperty
 
-#from PIL import Image
+# from PIL import Image
 
 Window.size = (360, 640)
 Builder.load_file('APC_settings.kv')
@@ -25,8 +25,42 @@ class BtnControl(Button):
 
 
 class RoundWidget(BoxLayout):
-    h = "round"
+    number_rounds = "round"
+    '''
+    def __init__(self):
+        r_round = len(self.ids.Round_Widget_id.children)
+
+    def method(self):
+        t_round = str(r_round)
+        return t_round
+
+    '''
+
+    ''' 
+    #ss = SettingsScreen()
+    #ss.RoundWidget()
+
+
+    #number_rounds = 'round'
+
+    number_rounds = StringProperty()
+    def print_label(self):
+        print(self.number_rounds)
+        print('it')
+
+
+    def amount(self):
+        r_round = len(self.ids.Round_Widget_id.children)
+        #global t_round
+        t_round = str(r_round)
+
+        self.number_rounds = t_round
+        return self.number_rounds
     pass
+
+    def round_testing(self):
+        self.ids['rw_label'].text = str(number_rounds)
+    '''
 
 
 class TestLabel(Label):
@@ -34,7 +68,6 @@ class TestLabel(Label):
 
 
 round_minutes = 0
-test_num = 4
 
 
 class Main:
@@ -164,30 +197,48 @@ class SettingsScreen(Screen, Num):
 
     def __init__(self, **kwargs):
         super(SettingsScreen, self).__init__(**kwargs)
+        self.n_rounds = self.num_rounds
 
     def num_rounds_plus(self):
         self.num_rounds += 1
-        print(self.num_rounds)
+        self.n_rounds += 1
+        print(self.n_rounds)
         self.add_rounds()
 
     def num_rounds_minus(self):
         if self.num_rounds > 0:
             self.num_rounds -= 1
+            self.n_rounds -= 1
             print(self.num_rounds)
             self.del_rounds()
+
         else:
             pass
 
+    def logic_num_rounds_and_blinds(self):
+        pass
+
     def add_rounds(self):
         # for i in range(self.num_rounds):
+        mytext = "round" + str(self.num_rounds)
 
         self.ids.Round_Widget_id.add_widget(RoundWidget(size_hint_y=0.5, pos_hint={'top': 1}))
+        #self.ids.Round_Widget_id.add_widget(Label(text=mytext, size_hint_y=0.1, pos_hint={'left': 1}))
+        #self.ids.Round_Widget_id.add_widget(Label(text='blinds', size_hint_y=0.1, pos_hint={'right': 1}))
+
+
+        print(self.ids.Round_Widget_id.children)
 
     def del_rounds(self):
+
+        self.ids.Round_Widget_id.remove_widget(self.ids.Round_Widget_id.children[0])
         print(self.ids.Round_Widget_id.children)
-        self.ids.Round_Widget_id.remove_widget(self.ids.Round_Widget_id.children[-1])
 
         # self.ids.Box_rounds.remove_widget(self.ids.test)
+
+    def num_of_widgets(self):
+        num_of_e = len(self.ids.Round_Widget_id.children)
+        return num_of_e
 
     def dialog_dismiss(self):
         self.dialog_dismiss()
