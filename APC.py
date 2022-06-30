@@ -5,16 +5,16 @@ from kivy.uix.widget import Widget
 from kivy.uix.label import Label
 from kivy.properties import NumericProperty
 from kivy.uix.boxlayout import BoxLayout
-from kivy.clock import Clock
+#from kivy.clock import Clock
 from kivy.uix.button import Button
-from kivy.uix.dropdown import DropDown
+#from kivy.uix.dropdown import DropDown
 from kivy.uix.screenmanager import ScreenManager, Screen
-from kivy.base import runTouchApp
+#from kivy.base import runTouchApp
 import time
 import threading
 from kivy.properties import StringProperty, ListProperty
 
-# from PIL import Image
+#from PIL import Image
 
 Window.size = (360, 640)
 Builder.load_file('APC_settings.kv')
@@ -24,14 +24,12 @@ class BtnControl(Button):
     pass
 
 
-class Round_Widget(BoxLayout):
-
+class RoundWidget(BoxLayout):
     pass
 
 
-class Test_label(Label):
-    def dict(self):
-        pass
+class TestLabel(Label):
+    pass
 
 
 round_minutes = 0
@@ -178,13 +176,17 @@ class SettingsScreen(Screen, Num):
     def add_rounds(self):
         # for i in range(self.num_rounds):
         # self.ids.Round_Widget_id.add_widget(Round_Widget(size_hint_y=0.5, pos_hint={'top': 1}))
-        self.ids.Round_Widget_id.add_widget(Test_label(size_hint_y=0.5, pos_hint={'top': 1}))
+        self.ids.Round_Widget_id.add_widget(TestLabel(size_hint_y=0.5, pos_hint={'top': 1}))
 
     def del_rounds(self):
-        #pass
+        # pass
+        print(self.ids.Round_Widget_id.children)
 
-
-        self.ids.Round_Widget_id.remove_widget(self.ids.Test_label)
+        if not self.ids.Round_Widget_id.children == 0:
+            self.ids.Round_Widget_id.remove_widget(self.ids.Round_Widget_id.children[-1])
+        else:
+            print('if')
+            pass
         # self.ids.Box_rounds.remove_widget(self.ids.test)
 
     def dialog_dismiss(self):
