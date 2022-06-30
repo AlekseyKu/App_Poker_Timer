@@ -25,6 +25,7 @@ class BtnControl(Button):
 
 
 class RoundWidget(BoxLayout):
+    h = "round"
     pass
 
 
@@ -33,6 +34,7 @@ class TestLabel(Label):
 
 
 round_minutes = 0
+test_num = 4
 
 
 class Main:
@@ -169,24 +171,22 @@ class SettingsScreen(Screen, Num):
         self.add_rounds()
 
     def num_rounds_minus(self):
-        self.num_rounds -= 1
-        print(self.num_rounds)
-        self.del_rounds()
+        if self.num_rounds > 0:
+            self.num_rounds -= 1
+            print(self.num_rounds)
+            self.del_rounds()
+        else:
+            pass
 
     def add_rounds(self):
         # for i in range(self.num_rounds):
-        # self.ids.Round_Widget_id.add_widget(Round_Widget(size_hint_y=0.5, pos_hint={'top': 1}))
-        self.ids.Round_Widget_id.add_widget(TestLabel(size_hint_y=0.5, pos_hint={'top': 1}))
+
+        self.ids.Round_Widget_id.add_widget(RoundWidget(size_hint_y=0.5, pos_hint={'top': 1}))
 
     def del_rounds(self):
-        # pass
         print(self.ids.Round_Widget_id.children)
+        self.ids.Round_Widget_id.remove_widget(self.ids.Round_Widget_id.children[-1])
 
-        if not self.ids.Round_Widget_id.children == 0:
-            self.ids.Round_Widget_id.remove_widget(self.ids.Round_Widget_id.children[-1])
-        else:
-            print('if')
-            pass
         # self.ids.Box_rounds.remove_widget(self.ids.test)
 
     def dialog_dismiss(self):
