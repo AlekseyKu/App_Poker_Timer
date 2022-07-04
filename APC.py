@@ -19,7 +19,7 @@ from kivy.properties import StringProperty, ListProperty
 Window.size = (360, 640)
 Builder.load_file('APC_settings.kv')
 
-
+global_num_round = NumericProperty(0)
 
 class BtnControl(Button):
     pass
@@ -39,26 +39,39 @@ class RoundWidgetNew(BoxLayout):
     def __init__(self, **kwargs):
         super(RoundWidgetNew, self).__init__(**kwargs)
         #super().__init__(**kwargs)
-        self.a = SettingsScreen()
-        self.r_round = len(self.ids.Round_Widget_id.children)
+        #self.a = SettingsScreen()
+        #self.r_round = len(self.ids.Round_Widget_id.children)
         #print(self.a.num_of_widgets())
 
 
 
         #self.len_round = len(self.ids.Round_Widget_id.children)
         #num_round = 'round' + str(self.len_round)
+        self.list_m_blinds = [5, 10, 15, 25, 50, 75, 100, 150, 250, 500, 750, 1000, 1500, 2000, 2500, 5000]
+
+
+        self.m_blind = self.list_m_blinds[0]
+        self.b_blind = self.m_blind * 2
+
+        self.label_m_blind = str(self.m_blind)
+        self.label_b_blind = str(self.b_blind)
 
 
         rw_label_num_round = Label(text="num_round", size_hint_x=0.25) #pos_hint={'right': 0})
         rw_button_m_blind = Button(text='-', size_hint_x=0.13)
-        rw_label_m_blind = Label(text='1', size_hint_x=0.10)
+        rw_label_m_blind = Label(text=self.label_m_blind, size_hint_x=0.10)
         rw_label_article = Label(text='/', size_hint_x=0.04)
-        rw_label_b_blind = Label(text='2', size_hint_x=0.10)
+        rw_label_b_blind = Label(text=self.label_b_blind, size_hint_x=0.10)
         rw_button_b_blind = Button(text='+', size_hint_x=0.13)
         rw_label_blinds = Label(text='blinds', size_hint_x=0.25)
 
         rw_button_m_blind.bind(on_press=self.clicker_func)
+        rw_button_m_blind.bind(on_press=self.button_down_blind)
+        sm.get_screen('menu').ids.menu_m_blind_id.text = self.label_m_blind
+
         rw_button_b_blind.bind(on_press=self.method)
+        rw_button_b_blind.bind(on_press=self.button_up_blind)
+        sm.get_screen('menu').ids.menu_b_blind_id.text = self.label_b_blind
 
         self.add_widget(rw_label_num_round)
         self.add_widget(rw_button_m_blind)
@@ -68,9 +81,25 @@ class RoundWidgetNew(BoxLayout):
         self.add_widget(rw_button_b_blind)
         self.add_widget(rw_label_blinds)
 
+    def button_down_blind(self, m_blind):
+        down_blind = self.m_blind
+        self.m_blind = self.list_m_blinds[1]
+
+        print(self.m_blind)
+        return down_blind
+
+    def button_up_blind(self, m_blind):
+        #up_blind = self.list_m_blinds[1]
+        self.list_m_blinds[1] = self.label_m_blind
+        print(self.list_m_blinds[1])
+        sm.get_screen('menu').ids.menu_m_blind_id.text = self.label_m_blind
+        sm.get_screen('menu').ids.menu_b_blind_id.text = self.label_b_blind
+        return self.label_m_blind
+
     def method(self, event):
-        print(self.a.num_of_widgets())
-        print(self.r_round)
+        pass
+        #print(self.a.num_of_widgets())
+        #print(self.r_round)
 
 class RoundWidget(BoxLayout):
     number_rounds = "round"
@@ -305,3 +334,5 @@ class APCApp(App):
 
 if __name__ == "__main__":
     APCApp().run()
+
+# https://ru.stackoverflow.com/questions/1012335/%D0%9F%D0%B5%D1%80%D0%B5%D0%B4%D0%B0%D1%87%D0%B0-%D0%BF%D0%B5%D1%80%D0%B5%D0%BC%D0%B5%D0%BD%D0%BD%D1%8B%D1%85-%D0%BC%D0%B5%D0%B6%D0%B4%D1%83-%D0%BE%D0%BA%D0%BD%D0%B0%D0%BC%D0%B8-%D0%B2-python-kivy
