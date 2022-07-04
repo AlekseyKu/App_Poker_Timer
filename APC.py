@@ -20,44 +20,83 @@ Window.size = (360, 640)
 Builder.load_file('APC_settings.kv')
 
 
+
 class BtnControl(Button):
     pass
 
+class RoundWidgetNew(BoxLayout):
+    #global len_round
+
+    def clicker_func(self, event):
+        pass
+        #print(self.len_round)
+        #print(self.num_of_widgets())
+        #print(self.len_round)
+        #print(len(self.ids.Round_Widget_id.children))
+        #print('hi')
+
+
+    def __init__(self, **kwargs):
+        super(RoundWidgetNew, self).__init__(**kwargs)
+        #super().__init__(**kwargs)
+        self.a = SettingsScreen()
+        self.r_round = len(self.ids.Round_Widget_id.children)
+        #print(self.a.num_of_widgets())
+
+
+
+        #self.len_round = len(self.ids.Round_Widget_id.children)
+        #num_round = 'round' + str(self.len_round)
+
+
+        rw_label_num_round = Label(text="num_round", size_hint_x=0.25) #pos_hint={'right': 0})
+        rw_button_m_blind = Button(text='-', size_hint_x=0.13)
+        rw_label_m_blind = Label(text='1', size_hint_x=0.10)
+        rw_label_article = Label(text='/', size_hint_x=0.04)
+        rw_label_b_blind = Label(text='2', size_hint_x=0.10)
+        rw_button_b_blind = Button(text='+', size_hint_x=0.13)
+        rw_label_blinds = Label(text='blinds', size_hint_x=0.25)
+
+        rw_button_m_blind.bind(on_press=self.clicker_func)
+        rw_button_b_blind.bind(on_press=self.method)
+
+        self.add_widget(rw_label_num_round)
+        self.add_widget(rw_button_m_blind)
+        self.add_widget(rw_label_m_blind)
+        self.add_widget(rw_label_article)
+        self.add_widget(rw_label_b_blind)
+        self.add_widget(rw_button_b_blind)
+        self.add_widget(rw_label_blinds)
+
+    def method(self, event):
+        print(self.a.num_of_widgets())
+        print(self.r_round)
 
 class RoundWidget(BoxLayout):
     number_rounds = "round"
     '''
     def __init__(self):
         r_round = len(self.ids.Round_Widget_id.children)
-
     def method(self):
         t_round = str(r_round)
         return t_round
-
     '''
 
     ''' 
     #ss = SettingsScreen()
     #ss.RoundWidget()
-
-
     #number_rounds = 'round'
-
     number_rounds = StringProperty()
     def print_label(self):
         print(self.number_rounds)
         print('it')
-
-
     def amount(self):
         r_round = len(self.ids.Round_Widget_id.children)
         #global t_round
         t_round = str(r_round)
-
         self.number_rounds = t_round
         return self.number_rounds
     pass
-
     def round_testing(self):
         self.ids['rw_label'].text = str(number_rounds)
     '''
@@ -197,19 +236,19 @@ class SettingsScreen(Screen, Num):
 
     def __init__(self, **kwargs):
         super(SettingsScreen, self).__init__(**kwargs)
-        self.n_rounds = self.num_rounds
+        #self.n_rounds = self.num_rounds
 
     def num_rounds_plus(self):
         self.num_rounds += 1
-        self.n_rounds += 1
-        print(self.n_rounds)
+        #self.n_rounds += 1
+        #print(self.n_rounds)
         self.add_rounds()
 
     def num_rounds_minus(self):
         if self.num_rounds > 0:
             self.num_rounds -= 1
-            self.n_rounds -= 1
-            print(self.num_rounds)
+            #self.n_rounds -= 1
+            #print(self.num_rounds)
             self.del_rounds()
 
         else:
@@ -220,19 +259,23 @@ class SettingsScreen(Screen, Num):
 
     def add_rounds(self):
         # for i in range(self.num_rounds):
-        mytext = "round" + str(self.num_rounds)
+        #mytext = "round" + str(self.num_rounds)
 
-        self.ids.Round_Widget_id.add_widget(RoundWidget(size_hint_y=0.5, pos_hint={'top': 1}))
+        #op
+        #self.ids.Round_Widget_id.add_widget(RoundWidget(size_hint_y=0.5, pos_hint={'top': 1}))
+
+
         #self.ids.Round_Widget_id.add_widget(Label(text=mytext, size_hint_y=0.1, pos_hint={'left': 1}))
-        #self.ids.Round_Widget_id.add_widget(Label(text='blinds', size_hint_y=0.1, pos_hint={'right': 1}))
+        self.ids.Round_Widget_id.add_widget(RoundWidgetNew(size_hint_y=0.5, pos_hint={'top': 1}))
 
 
-        print(self.ids.Round_Widget_id.children)
+        #print(self.ids.Round_Widget_id.children)
 
     def del_rounds(self):
 
         self.ids.Round_Widget_id.remove_widget(self.ids.Round_Widget_id.children[0])
-        print(self.ids.Round_Widget_id.children)
+        #print(self.ids.Round_Widget_id.children)
+        #print(self.num_of_widgets())
 
         # self.ids.Box_rounds.remove_widget(self.ids.test)
 
