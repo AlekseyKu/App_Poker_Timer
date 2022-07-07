@@ -267,7 +267,7 @@
 
         BoxLayout:
             orientation: "horizontal"
-            size_hint: [1, 0.15]
+            size_hint: [1, 0.15] #LOGO
 
             Label:
                 size_hint: [0.2, 1]
@@ -315,9 +315,30 @@
                     center_x: self.parent.center_x
                     center_y: self.parent.center_y
 
+        FloatLayout:
+            size_hint: [1, 0.1] #classic tour
+            #orientation: 'vertical'
+            #pos_hint: {'center': (.5, .5)}
+            #border: 0.5
+
+            Spinner:
+                id: spinner_id
+                size_hint: None, None
+                size: 300, 50
+                pos_hint: {'center': (.5, .2)}
+                background_color: [1, 1, 1, 1]
+                text: 'SELECT TOURNAMENT'
+                values: ['classic Arizona tournament', 'fast tournament', 'custom tournament']
+                on_text: root.spinner_func(spinner_id.text)
+
+                #on_text: if spinner_id.text == 'classic Arizona tournament' : root.spinner_cat()
+                    #elif: spinner_id.text == 'fast tournament' : root.spinner_ft()
+                    #else: root.spinner.ct()
+                #on_text: print("The spinner {} has text {}".format(self, self.text))
+
         BoxLayout:
             orientation: "vertical"
-            size_hint: [1, 0.3]
+            size_hint: [1, 0.2] #round minutes
 
             Label:
                 size_hint: [1, 0.4]
@@ -353,7 +374,7 @@
 
         BoxLayout:
             orientation: "vertical"
-            size_hint: [1, 0.4]
+            size_hint: [1, 0.4] #rounds
 
             Label:
                 size_hint: [1, 0.2]
@@ -385,7 +406,7 @@
 
         BoxLayout:
             orientation: "horizontal"
-            size_hint: [1, 0.15]
+            size_hint: [1, 0.15] #Buttons plus/minus
 
             Label:
                 size_hint: [0.2, 1]

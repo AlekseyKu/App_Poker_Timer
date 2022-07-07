@@ -13,38 +13,43 @@ from kivy.uix.screenmanager import ScreenManager, Screen
 import time
 import threading
 from kivy.properties import StringProperty, ListProperty
+from kivy.uix.spinner import Spinner
 
 # from PIL import Image
 
 Window.size = (360, 640)
 Builder.load_file('APC_settings.kv')
+Builder.load_file('Classic_tournament.kv')
+
+round_minutes = 0
 
 global_num_round = NumericProperty(0)
+
 
 class BtnControl(Button):
     pass
 
+
 class RoundWidgetNew(BoxLayout):
-    #global len_round
+    # global len_round
 
     def clicker_func(self, event):
         pass
-        #print(self.len_round)
-        #print(self.num_of_widgets())
-        #print(self.len_round)
-        #print(len(self.ids.Round_Widget_id.children))
-        #print('hi')
-
+        # print(self.len_round)
+        # print(self.num_of_widgets())
+        # print(self.len_round)
+        # print(len(self.ids.Round_Widget_id.children))
+        # print('hi')
 
     def __init__(self, **kwargs):
         super(RoundWidgetNew, self).__init__(**kwargs)
-        #super().__init__(**kwargs)
-        #self.a = SettingsScreen()
-        #self.r_round = len(self.ids.Round_Widget_id.children)
-        #print(self.a.num_of_widgets())
+        pass
+        # super().__init__(**kwargs)
+        # self.a = SettingsScreen()
+        # self.r_round = len(self.ids.Round_Widget_id.children)
+        # print(self.a.num_of_widgets())
 
-
-
+    '''
         #self.len_round = len(self.ids.Round_Widget_id.children)
         #num_round = 'round' + str(self.len_round)
         self.list_m_blinds = [5, 10, 15, 25, 50, 75, 100, 150, 250, 500, 750, 1000, 1500, 2000, 2500, 5000]
@@ -81,6 +86,11 @@ class RoundWidgetNew(BoxLayout):
         self.add_widget(rw_button_b_blind)
         self.add_widget(rw_label_blinds)
 
+    def logic(self):
+
+        self.label_m_blind.text = self.m_blind
+        self.label_b_blind.text = self.b_blind
+
     def button_down_blind(self, m_blind):
         down_blind = self.m_blind
         self.m_blind = self.list_m_blinds[1]
@@ -90,8 +100,11 @@ class RoundWidgetNew(BoxLayout):
 
     def button_up_blind(self, m_blind):
         #up_blind = self.list_m_blinds[1]
-        self.list_m_blinds[1] = self.label_m_blind
-        print(self.list_m_blinds[1])
+        self.m_blind = self.list_m_blinds[3]
+        self.b_blind = self.m_blind * 2
+        print(self.label_m_blind)
+        print(self.label_b_blind)
+        self.logic()
         sm.get_screen('menu').ids.menu_m_blind_id.text = self.label_m_blind
         sm.get_screen('menu').ids.menu_b_blind_id.text = self.label_b_blind
         return self.label_m_blind
@@ -100,6 +113,8 @@ class RoundWidgetNew(BoxLayout):
         pass
         #print(self.a.num_of_widgets())
         #print(self.r_round)
+    '''
+
 
 class RoundWidget(BoxLayout):
     number_rounds = "round"
@@ -135,7 +150,17 @@ class TestLabel(Label):
     pass
 
 
-round_minutes = 0
+'''
+class TourSpinner(Spinner):
+    def spinner_cat(self):
+        print('cat')
+
+    def spinner_ft(self):
+        print('ft')
+
+    def spinner_ct(self):
+        print('ct')
+'''
 
 
 class Main:
@@ -265,19 +290,19 @@ class SettingsScreen(Screen, Num):
 
     def __init__(self, **kwargs):
         super(SettingsScreen, self).__init__(**kwargs)
-        #self.n_rounds = self.num_rounds
+        # self.n_rounds = self.num_rounds
 
     def num_rounds_plus(self):
         self.num_rounds += 1
-        #self.n_rounds += 1
-        #print(self.n_rounds)
+        # self.n_rounds += 1
+        # print(self.n_rounds)
         self.add_rounds()
 
     def num_rounds_minus(self):
         if self.num_rounds > 0:
             self.num_rounds -= 1
-            #self.n_rounds -= 1
-            #print(self.num_rounds)
+            # self.n_rounds -= 1
+            # print(self.num_rounds)
             self.del_rounds()
 
         else:
@@ -287,24 +312,24 @@ class SettingsScreen(Screen, Num):
         pass
 
     def add_rounds(self):
+        pass
         # for i in range(self.num_rounds):
-        #mytext = "round" + str(self.num_rounds)
+        # mytext = "round" + str(self.num_rounds)
 
-        #op
-        #self.ids.Round_Widget_id.add_widget(RoundWidget(size_hint_y=0.5, pos_hint={'top': 1}))
+        # op
+        # self.ids.Round_Widget_id.add_widget(RoundWidget(size_hint_y=0.5, pos_hint={'top': 1}))
 
+        # self.ids.Round_Widget_id.add_widget(Label(text=mytext, size_hint_y=0.1, pos_hint={'left': 1}))
+        # self.ids.Round_Widget_id.add_widget(RoundWidgetNew(size_hint_y=0.5, pos_hint={'top': 1}))
 
-        #self.ids.Round_Widget_id.add_widget(Label(text=mytext, size_hint_y=0.1, pos_hint={'left': 1}))
-        self.ids.Round_Widget_id.add_widget(RoundWidgetNew(size_hint_y=0.5, pos_hint={'top': 1}))
-
-
-        #print(self.ids.Round_Widget_id.children)
+        # print(self.ids.Round_Widget_id.children)
 
     def del_rounds(self):
+        pass
 
-        self.ids.Round_Widget_id.remove_widget(self.ids.Round_Widget_id.children[0])
-        #print(self.ids.Round_Widget_id.children)
-        #print(self.num_of_widgets())
+        # self.ids.Round_Widget_id.remove_widget(self.ids.Round_Widget_id.children[0])
+        # print(self.ids.Round_Widget_id.children)
+        # print(self.num_of_widgets())
 
         # self.ids.Box_rounds.remove_widget(self.ids.test)
 
@@ -314,6 +339,28 @@ class SettingsScreen(Screen, Num):
 
     def dialog_dismiss(self):
         self.dialog_dismiss()
+
+    def spinner_func(self, value):
+        if value == 'classic Arizona tournament':
+            print('cAt')
+            Tournaments().tournament_cat()
+
+        elif value == 'fast tournament':
+            print('ft')
+
+        elif value == 'custom tournament':
+            print('ct')
+
+        else:
+            pass
+
+
+class Tournaments(SettingsScreen):
+    def tournament_cat(self):
+        self.num_rounds = 15
+        Main().round_minutes_plus()
+
+
 
 
 class Manager(ScreenManager):
