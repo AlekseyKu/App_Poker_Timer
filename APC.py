@@ -14,6 +14,7 @@ import time
 import threading
 from kivy.properties import StringProperty, ListProperty
 from kivy.uix.spinner import Spinner
+from kivy.uix.scrollview import ScrollView
 
 # from PIL import Image
 
@@ -31,9 +32,12 @@ class BtnControl(Button):
 
 
 class WidgetTournamentCat(BoxLayout):
+    orientation = 'vertical'
 
     def widget_construction(self):
-        rw_label_num_round = Label(text=self.label_num_round, size_hint_x=0.25)  # pos_hint={'right': 0})
+        rw_boxlayout = BoxLayout(orientation="horizontal")
+
+        rw_label_num_round = Label(text=self.label_num_round, size_hint_x=0.25) # pos_hint={'right': 0})
         # rw_button_m_blind = Button(text='-', size_hint_x=0.13)
         rw_label_m_blind = Label(text=self.label_m_blind, size_hint_x=0.10)
         rw_label_article = Label(text='/', size_hint_x=0.04)
@@ -49,35 +53,184 @@ class WidgetTournamentCat(BoxLayout):
         # rw_button_b_blind.bind(on_press=self.button_up_blind)
         sm.get_screen('menu').ids.menu_b_blind_id.text = self.label_b_blind
 
-        self.add_widget(rw_label_num_round)
+        self.add_widget(rw_boxlayout)
+        rw_boxlayout.add_widget(rw_label_num_round)
         # self.add_widget(rw_button_m_blind)
-        self.add_widget(rw_label_m_blind)
-        self.add_widget(rw_label_article)
-        self.add_widget(rw_label_b_blind)
+        rw_boxlayout.add_widget(rw_label_m_blind)
+        rw_boxlayout.add_widget(rw_label_article)
+        rw_boxlayout.add_widget(rw_label_b_blind)
         # self.add_widget(rw_button_b_blind)
-        self.add_widget(rw_label_blinds)
+        rw_boxlayout.add_widget(rw_label_blinds)
+
+    def round_1(self):
+        self.label_num_round = 'round ' + str(self.num_round[0])
+
+        self.m_blind = self.list_blinds[0]
+        self.label_m_blind = str(self.m_blind)
+
+        self.b_blind = self.m_blind * 2
+        self.label_b_blind = str(self.b_blind)
+
+        self.widget_construction()
+
+    def round_2(self):
+        self.label_num_round = 'round ' + str(self.num_round[1])
+
+        self.m_blind = self.list_blinds[1]
+        self.label_m_blind = str(self.m_blind)
+
+        self.b_blind = self.m_blind * 2
+        self.label_b_blind = str(self.b_blind)
+
+        self.widget_construction()
+
+    def round_3(self):
+        self.label_num_round = 'round ' + str(self.num_round[2])
+
+        self.m_blind = self.list_blinds[2]
+        self.label_m_blind = str(self.m_blind)
+
+        self.b_blind = self.m_blind * 2
+        self.label_b_blind = str(self.b_blind)
+
+        self.widget_construction()
+
+    def round_4(self):
+        self.label_num_round = 'round ' + str(self.num_round[3])
+
+        self.m_blind = self.list_blinds[3]
+        self.label_m_blind = str(self.m_blind)
+
+        self.b_blind = self.m_blind * 2
+        self.label_b_blind = str(self.b_blind)
+
+        self.widget_construction()
+
+    def round_5(self):
+        self.label_num_round = 'round ' + str(self.num_round[4])
+
+        self.m_blind = self.list_blinds[4]
+        self.label_m_blind = str(self.m_blind)
+
+        self.b_blind = self.m_blind * 2
+        self.label_b_blind = str(self.b_blind)
+
+        self.widget_construction()
+
+    def round_6(self):
+        self.label_num_round = 'round ' + str(self.num_round[5])
+
+        self.m_blind = self.list_blinds[5]
+        self.label_m_blind = str(self.m_blind)
+
+        self.b_blind = self.m_blind * 2
+        self.label_b_blind = str(self.b_blind)
+
+        self.widget_construction()
+
+    def round_7(self):
+        self.label_num_round = 'round ' + str(self.num_round[6])
+
+        self.m_blind = self.list_blinds[6]
+        self.label_m_blind = str(self.m_blind)
+
+        self.b_blind = self.m_blind * 2
+        self.label_b_blind = str(self.b_blind)
+
+        self.widget_construction()
+
+    def round_8(self):
+        self.label_num_round = 'round ' + str(self.num_round[7])
+
+        self.m_blind = self.list_blinds[7]
+        self.label_m_blind = str(self.m_blind)
+
+        self.b_blind = self.m_blind * 2
+        self.label_b_blind = str(self.b_blind)
+
+        self.widget_construction()
+
+    def round_9(self):
+        self.label_num_round = 'round ' + str(self.num_round[8])
+
+        self.m_blind = self.list_blinds[8]
+        self.label_m_blind = str(self.m_blind)
+
+        self.b_blind = self.m_blind * 2
+        self.label_b_blind = str(self.b_blind)
+
+        self.widget_construction()
+
+    def round_10(self):
+        self.label_num_round = 'round ' + str(self.num_round[9])
+
+        self.m_blind = self.list_blinds[9]
+        self.label_m_blind = str(self.m_blind)
+
+        self.b_blind = self.m_blind * 2
+        self.label_b_blind = str(self.b_blind)
+
+        self.widget_construction()
 
     def __init__(self, **kwargs):
         super(WidgetTournamentCat, self).__init__(**kwargs)
 
-        self.num_round = [1, 2, 3]
-        # self.num_round = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]
+        # self.num_round = [1, 2, 3]
+        self.num_round = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]
 
+        # self.list_blinds = [5, 10, 15]
         self.list_blinds = [5, 10, 15, 25, 50, 75, 100, 150, 250, 500, 750, 1000, 1500, 2000, 2500, 5000]
 
-        # for round in self.num_round:
-        self.label_num_round = 'round ' + str(self.num_round[0])
-        self.m_blind = self.list_blinds[0]
-        self.b_blind = self.m_blind * 2
+        self.round_1()
+        self.round_2()
+        self.round_3()
+        self.round_4()
+        self.round_5()
+        self.round_6()
+        self.round_7()
+        self.round_8()
+        self.round_9()
+        self.round_10()
 
-        self.label_m_blind = str(self.m_blind)
-        self.label_b_blind = str(self.b_blind)
-        self.widget_construction()
         '''
-        for round in self.num_round:
-            self.widget_construction()
-            round = round + 1
+        for index in self.num_round:
+            if index == 1:
+                self.label_num_round = 'round ' + str(self.num_round[0])
+                self.m_blind = self.list_blinds[0]
+                self.b_blind = self.m_blind * 2
+                self.widget_construction()
+                print(self.m_blind)
+            else:
+                self.next = index
+                self.label_num_round = 'round ' + str(self.next)
+                self.m_blind = self.list_blinds[0+1]
+                self.b_blind = self.m_blind * 2
+                print(self.m_blind)
+                self.widget_construction()
         '''
+class WidgetTournamentCt(BoxLayout):
+    label_num_round = StringProperty()
+    label_m_blinds = StringProperty()
+    label_b_blinds = StringProperty()
+    # self.num_round = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]
+    # self.list_blinds = [5, 10, 15, 25, 50, 75, 100, 150, 250, 500, 750, 1000, 1500, 2000, 2500, 5000]
+    num_round = [1, 2, 3]
+    list_blinds = [5, 10, 15]
+
+    def __init__(self, **kwargs):
+        super(WidgetTournamentCt, self).__init__(**kwargs)
+
+        for index in self.num_round:
+            print(index)
+            self.label_num_round = 'round ' + str(self.num_round[0])
+
+            m_blind = self.list_blinds[0]
+            self.label_m_blinds = str(self.list_blinds[0])
+            self.label_b_blinds = str(m_blind * 2)
+
+
+
+
 
 class RoundWidgetNew(BoxLayout):
     # global len_round
@@ -195,10 +348,8 @@ class TestLabel(Label):
 class TourSpinner(Spinner):
     def spinner_cat(self):
         print('cat')
-
     def spinner_ft(self):
         print('ft')
-
     def spinner_ct(self):
         print('ct')
 '''
@@ -370,9 +521,8 @@ class SettingsScreen(Screen, Num):
             # print('cAt')
             self.tournament_cat()
 
-
         elif value == 'fast tournament':
-            print('ft')
+            self.tournament_ft()
 
         elif value == 'custom tournament':
             print('ct')
@@ -385,7 +535,18 @@ class SettingsScreen(Screen, Num):
         round_minutes = 15
         Main().round_minutes_func()
 
+        if self.ids.Round_Widget_id.children:
+            self.ids.Round_Widget_id.remove_widget(self.ids.Round_Widget_id.children[0])
         self.ids.Round_Widget_id.add_widget(WidgetTournamentCat(size_hint_y=0.5, pos_hint={'top': 1}))
+
+    def tournament_ft(self):
+        global round_minutes
+        round_minutes = 10
+        Main().round_minutes_func()
+
+        if self.ids.Round_Widget_id.children:
+            self.ids.Round_Widget_id.remove_widget(self.ids.Round_Widget_id.children[0])
+        self.ids.Round_Widget_id.add_widget(WidgetTournamentCt(size_hint_y=0.5, pos_hint={'top': 1}))
 
         '''
         rounds = 1
@@ -394,6 +555,7 @@ class SettingsScreen(Screen, Num):
             self.ids.Round_Widget_id.add_widget(WidgetTournamentCat(size_hint_y=0.5, pos_hint={'top': 1}))
             rounds = rounds+1
         '''
+
 
 class Manager(ScreenManager):
     pass
